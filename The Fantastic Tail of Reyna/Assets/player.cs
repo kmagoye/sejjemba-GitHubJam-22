@@ -5,97 +5,33 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
     public float moveSpeed;
-    float x;
     Vector2 Direction;
-    public CircleCollider2D interactRadius;
-    int Wall = 1 << 10;
-    bool right = true;
-    bool left = true;
-    bool up = true;
-    bool down = true;
-    Rigidbody2D rb2d;
-
+    BoxCollider2D box;
+    int wallLayer = 1 << 10;
 
     private void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        x = 1 / moveSpeed;
-        Direction = new Vector2(Input.GetAxisRaw("Horizontal") * x, Input.GetAxisRaw("Vertical") * x);
+        Direction = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, 0);
 
-        checkWall();
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position,box.size, 0f, Direction, 1 * moveSpeed * Time.deltaTime, wallLayer);
 
-        move();
-    }
-
-    void checkWall()
-    {
-        RaycastHit2D Right = Physics2D.Raycast(new Vector2(transform.position.x + 0.51f, transform.position.y + 1), new Vector2(0,-1), 1f, Wall);
-
-        if (Right)
+        if (hit == false)
         {
-            right = false;
-        }
-        else
-        {
-            right = true;
+            transform.Translate(Direction);
         }
 
-        RaycastHit2D Left = Physics2D.Raycast(new Vector2(transform.position.x - 0.51f, transform.position.y + 1), new Vector2(0, -1), 1f, Wall);
+        Direction = new Vector2(0, Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime);
 
-        if (Left)
-        {
-            left = false;
-        }
-        else
-        {
-            left = true;
-        }
+        hit = Physics2D.BoxCast(transform.position, box.size, 0f, Direction, 1 * moveSpeed * Time.deltaTime, wallLayer);
 
-        RaycastHit2D Up = Physics2D.Raycast(new Vector2(transform.position.x + 1, transform.position.y + 0.51f), new Vector2(-1, 0), 1f, Wall);
-
-        if (Up)
+        if (hit == false)
         {
-            up = false;
-        }
-        else
-        {
-            up = true;
-        }
-
-        Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y - 0.25f), new Vector2(-1, 0), Color.red);
-        RaycastHit2D Down = Physics2D.Raycast(new Vector2(transform.position.x + 1, transform.position.y - 0.51f), new Vector2(-1, 0), 1f, Wall);
-
-        if (Down)
-        {
-            down = false;
-        }
-        else
-        {
-            down = true;
-        }
-    }
-
-    void move()
-    {
-        if ((Input.GetKey("right") ^ Input.GetKey("d")) && right)
-        {
-            transform.Translate(new Vector2(x,0));
-        }
-        if ((Input.GetKey("left") ^ Input.GetKey("a")) && left)
-        {
-            transform.Translate(new Vector2(-x, 0));
-        }
-        if ((Input.GetKey("up") ^ Input.GetKey("w")) && up)
-        {
-            transform.Translate(new Vector2(0, x));
-        }
-        if ((Input.GetKey("down") ^ Input.GetKey("s")) && down)
-        {
-            transform.Translate(new Vector2(0, -x));
+            transform.Translate(Direction);
         }
     }
 }
