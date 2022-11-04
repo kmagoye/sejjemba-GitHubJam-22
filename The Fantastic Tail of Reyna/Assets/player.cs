@@ -7,6 +7,7 @@ public class player : MonoBehaviour
     public float moveSpeed;
     Vector2 Direction;
     BoxCollider2D box;
+    Rigidbody2D rb2d;
 
     int wallLayer = 1 << 10;
     int interactableLayer = 1 << 8;
@@ -18,17 +19,27 @@ public class player : MonoBehaviour
     private void Start()
     {
         box = GetComponent<BoxCollider2D>();
+        rb2d = GetComponent<Rigidbody2D>();
         interactables = FindObjectsOfType<interactable>();
     }
 
     private void Update()
     {
-        //CheckInteractable();
-        CheckInteractableTwo();
+        CheckInteractable();
+
+        if (Input.GetKeyDown("x"))
+        {
+            if(selected != null)
+            {
+                selected.Interact();
+            }
+        }
     }
 
-    void CheckInteractableTwo()
+    void CheckInteractable()
     {
+        //checking if player is within a interactable's hit box
+
         RaycastHit2D selectedCheck = Physics2D.Raycast(transform.position, transform.position, 0.01f, interactableLayer);
 
         if(selectedCheck == true)
@@ -43,16 +54,20 @@ public class player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //movement and movement checks
+        //checking for a wall in x direction
 
         Direction = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, 0);
 
         RaycastHit2D hit = Physics2D.BoxCast(transform.position,box.size, 0f, Direction, 1 * moveSpeed * Time.deltaTime, wallLayer);
 
+        //moving in x 
+
         if (hit == false)
         {
             transform.Translate(Direction);
         }
+
+        //same deal for y direction
 
         Direction = new Vector2(0, Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime);
 
@@ -64,8 +79,8 @@ public class player : MonoBehaviour
         }
     }
 
-    float Pythagoreans(Vector2 FarPoint, Vector2 ClosePoint)
+    public void TP(Vector2 targetPosition)
     {
-        return Mathf.Sqrt((FarPoint.x - ClosePoint.x)*(FarPoint.x - ClosePoint.x) + (FarPoint.y - ClosePoint.y)*(FarPoint.y - ClosePoint.y));
+        rb2d.position = targetPosition;
     }
 }
