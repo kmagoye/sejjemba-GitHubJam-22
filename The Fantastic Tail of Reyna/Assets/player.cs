@@ -23,46 +23,21 @@ public class player : MonoBehaviour
 
     private void Update()
     {
-        CheckInteractable();           
+        //CheckInteractable();
+        CheckInteractableTwo();
     }
 
-    void CheckInteractable()
+    void CheckInteractableTwo()
     {
-        float DistFromSelected = 0;
-        Vector2 interactableDirection;
+        RaycastHit2D selectedCheck = Physics2D.Raycast(transform.position, transform.position, 0.01f, interactableLayer);
 
-        foreach (interactable interactable in interactables)
+        if(selectedCheck == true)
         {
-            if(selected != null)
-            {
-                DistFromSelected = Pythagoreans(selected.transform.position , transform.position);
-            }
-
-            interactableDirection = interactable.transform.position - transform.position;
-
-            RaycastHit2D selectedCheck = Physics2D.Raycast(transform.position, interactableDirection, Range, interactableLayer);
-
-            if (selected != null)
-            {
-                if (selectedCheck == true)
-                {
-                    selected = selectedCheck.transform.GetComponent<interactable>();
-                }
-                else
-                {
-                    selected = null;
-                }
-            }
-            else
-            {
-                if (selectedCheck == true)
-                {
-                    if (Pythagoreans(selectedCheck.transform.position, transform.position) > DistFromSelected)
-                    {
-                        selected = selectedCheck.transform.GetComponent<interactable>();
-                    }
-                }
-            }
+            selected = selectedCheck.transform.GetComponent<interactable>();
+        }
+        else
+        {
+            selected = null;
         }
     }
 
