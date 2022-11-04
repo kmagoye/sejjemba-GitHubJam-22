@@ -10,13 +10,12 @@ public class door : MonoBehaviour
     camera_manager cameraManager;
 
     public door sisterDoor;
-    Transform target;
+    public Transform target;
     player player;
 
     private void Start()
     {
         player = FindObjectOfType<player>();
-        target = GetComponentInChildren<Transform>();
         camera = cameraObject.GetComponent<CinemachineVirtualCamera>();
         cameraManager = FindObjectOfType<camera_manager>();
     }

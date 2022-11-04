@@ -27,7 +27,7 @@ public class player : MonoBehaviour
     {
         CheckInteractable();
 
-        if (Input.GetKeyDown("x"))
+        if (Input.GetKeyDown("x") && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
             if(selected != null)
             {
@@ -40,9 +40,9 @@ public class player : MonoBehaviour
     {
         //checking if player is within a interactable's hit box
 
-        RaycastHit2D selectedCheck = Physics2D.Raycast(transform.position, transform.position, 0.01f, interactableLayer);
+        RaycastHit2D selectedCheck = Physics2D.BoxCast(transform.position, box.size, 0f, Direction, 1 * moveSpeed * Time.deltaTime, interactableLayer);
 
-        if(selectedCheck == true)
+        if (selectedCheck == true)
         {
             selected = selectedCheck.transform.GetComponent<interactable>();
         }
