@@ -16,22 +16,33 @@ public class player : MonoBehaviour
     interactable[] interactables;
     public interactable selected;
 
+    public bool inConvo = false;
+    dialougeManager dialougeManager;
+
     private void Start()
     {
         box = GetComponent<BoxCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
         interactables = FindObjectsOfType<interactable>();
+        dialougeManager = FindObjectOfType<dialougeManager>();
     }
 
     private void Update()
     {
         CheckInteractable();
 
-        if (Input.GetKeyDown("x") && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        if (Input.GetKeyDown("x"))
         {
-            if(selected != null)
+            if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0 && inConvo == false)
             {
-                selected.Interact();
+                if (selected != null)
+                {
+                    selected.Interact();
+                }
+            }
+            if (inConvo)
+            {
+                dialougeManager.displayNextScentence();
             }
         }
     }
@@ -62,7 +73,7 @@ public class player : MonoBehaviour
 
         //moving in x 
 
-        if (hit == false)
+        if (!hit && !inConvo)
         {
             transform.Translate(Direction);
         }
@@ -73,7 +84,7 @@ public class player : MonoBehaviour
 
         hit = Physics2D.BoxCast(transform.position, box.size, 0f, Direction, 1 * moveSpeed * Time.deltaTime, wallLayer);
 
-        if (hit == false)
+        if (!hit && !inConvo)
         {
             transform.Translate(Direction);
         }
