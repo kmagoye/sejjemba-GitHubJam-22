@@ -33,7 +33,14 @@ public class dialougeManager : MonoBehaviour
     private void Update()
     {
         textBox.enabled = conversing;
-        continueText.enabled = !typing;
+        if (conversing)
+        {
+            continueText.enabled = !typing;
+        }
+        else
+        {
+            continueText.enabled = false;
+        }
     }
 
     public void startDialouge(dialougeClass dialouge)
