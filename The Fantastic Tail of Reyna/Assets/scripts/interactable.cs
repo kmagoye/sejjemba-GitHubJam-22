@@ -29,7 +29,7 @@ public class interactable : MonoBehaviour
         }
         else if (dialougeTrigger != null)
         {
-            dialougeTrigger.starDialouge();
+            dialougeTrigger.startDialouge();
         }
     }
 }

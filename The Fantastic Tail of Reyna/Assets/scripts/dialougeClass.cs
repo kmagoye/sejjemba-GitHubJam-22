@@ -9,4 +9,6 @@ public class dialougeClass
     public string[] name;
 
     public string[] scentences;
+
+    public string Event;
 }

@@ -7,8 +7,11 @@ public class dialougeManager : MonoBehaviour
 {
     Queue<string> scentences;
     Queue<string> names;
+    string Event;
 
     player player;
+
+    eventmanager eventmanager;
 
     public SpriteRenderer textBox;
     public TMP_Text nameSlot;
@@ -19,9 +22,10 @@ public class dialougeManager : MonoBehaviour
 
     bool typing = false;
 
-    void Start()
+    void Awake()
     {
         player = FindObjectOfType<player>();
+        eventmanager = FindObjectOfType<eventmanager>();
 
         scentences = new Queue<string>();
         names = new Queue<string>();
@@ -32,6 +36,7 @@ public class dialougeManager : MonoBehaviour
     private void Update()
     {
         textBox.enabled = conversing;
+
         if (conversing)
         {
             continueText.enabled = !typing;
@@ -46,10 +51,8 @@ public class dialougeManager : MonoBehaviour
     {
         conversing = true;
 
-        scentences.Clear();
-        names.Clear();
 
-        foreach(string scentence in dialouge.scentences)
+        foreach (string scentence in dialouge.scentences)
         {
             scentences.Enqueue(scentence);
         }
@@ -58,6 +61,8 @@ public class dialougeManager : MonoBehaviour
         {
             names.Enqueue(name);
         }
+
+        Event = dialouge.Event;
 
         displayNextScentence();
 
@@ -80,11 +85,21 @@ public class dialougeManager : MonoBehaviour
 
     public void endDialouge()
     {
+        scentences.Clear();
+        names.Clear();
+
         player.inConvo = false;
 
         conversing = false;
 
         nameSlot.text = scentenceSlot.text = null;
+
+        if(Event != null)
+        {
+            eventmanager.triggerEvent(Event);
+        }
+
+        Event = null;
     }
 
     void Type(string scentence, string name)

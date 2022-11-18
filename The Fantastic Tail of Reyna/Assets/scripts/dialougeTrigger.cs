@@ -19,7 +19,7 @@ public class dialougeTrigger : MonoBehaviour
         dialouges.Dequeue(); // the first thing in the menus always freaks out so skip it and start in the second spot
     }
 
-    public void starDialouge()
+    public void startDialouge()
     {
         if (dialouges.Count > 0)
         {

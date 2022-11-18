@@ -8,6 +8,7 @@ public class door : MonoBehaviour
     public GameObject cameraObject;
     CinemachineVirtualCamera camera;
     camera_manager cameraManager;
+    dialougeTrigger dialougeTrigger;
 
     public door sisterDoor;
     public Transform target;
@@ -18,6 +19,11 @@ public class door : MonoBehaviour
         player = FindObjectOfType<player>();
         camera = cameraObject.GetComponent<CinemachineVirtualCamera>();
         cameraManager = FindObjectOfType<camera_manager>();
+
+        if(GetComponent<dialougeTrigger>() != null)
+        {
+            dialougeTrigger = GetComponent<dialougeTrigger>();
+        }
     }
 
     public void TP()
@@ -27,5 +33,10 @@ public class door : MonoBehaviour
 
         //switches camera
         cameraManager.SetCamera(sisterDoor.camera);
+
+        if(dialougeTrigger != null)
+        {
+            dialougeTrigger.startDialouge();
+        }
     }
 }
