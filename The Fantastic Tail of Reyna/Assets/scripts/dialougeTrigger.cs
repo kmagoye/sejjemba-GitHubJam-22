@@ -5,8 +5,8 @@ using UnityEngine;
 public class dialougeTrigger : MonoBehaviour
 {
     public List<dialougeClass> Dialouges;
-    Queue<dialougeClass> dialouges;
-
+    public Queue<dialougeClass> dialouges;
+    
     private void Start()
     {
         dialouges = new Queue<dialougeClass>();
