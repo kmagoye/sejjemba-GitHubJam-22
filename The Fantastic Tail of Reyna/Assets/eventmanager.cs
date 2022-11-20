@@ -8,7 +8,17 @@ public class eventmanager : MonoBehaviour
     {
         if(eventName == "coffee")
         {
+            FindObjectOfType<player>().caffinated = true;
+        }
 
+        if (eventName == "lair key obtained")
+        {
+            FindObjectOfType<progressionmanager>().lairDoorKeyObtained = true;
+        }
+
+        if(eventName == "returned to woods")
+        {
+            FindObjectOfType<progressionmanager>().returnToWoods();
         }
     }
 }

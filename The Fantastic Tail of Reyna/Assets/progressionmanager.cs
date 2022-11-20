@@ -10,32 +10,45 @@ public class progressionmanager : MonoBehaviour
     public GameObject skatersIntended;
     public GameObject skatersAlternate;
 
-    int x = 1;
 
-    bool intended = true;
+    public dialougeTrigger lairDoorDialouge;
+    public GameObject lairDoor;
+
+    public GameObject catHerdIntended;
+    public GameObject catHerdAlternate;
+
+    public GameObject catHerdTwo;
+
+    bool intendedSkaterPath = true;
+
+    int x = 1;
+    int y = 1;
+
+    public bool lairDoorKeyObtained = false;
 
     private void Start()
     {
-        //GetComponent<dialougeTrigger>().startDialouge();
+         GetComponent<dialougeTrigger>().startDialouge();
     }
 
     private void Update()
     {
-        while (x == 1)
+        lairDoor.GetComponent<BoxCollider2D>().enabled = lairDoorKeyObtained;
+
+        if (x == 1)
         {
-            if (fence.dialouges.Count < 1)
+            if (fence.dialouges.Count == 0)
             {
-                print("a");
                 if (skatersOne.dialouges.Count > 0)
                 {
-                    intended = false;
+                    intendedSkaterPath = false;
                 }
                 if (skatersOne.dialouges.Count == 0)
                 {
-                    intended = true;
+                    intendedSkaterPath = true;
                 }
 
-                if (intended)
+                if (intendedSkaterPath)
                 {
                     skatersIntended.GetComponent<Rigidbody2D>().position = skatersOne.transform.position;
                 }
@@ -44,10 +57,38 @@ public class progressionmanager : MonoBehaviour
                     skatersAlternate.GetComponent<Rigidbody2D>().position = skatersOne.transform.position;
                 }
 
-                skatersOne.transform.Translate(new Vector2(1000, 1000));
+                skatersOne.GetComponent<BoxCollider2D>().enabled = false;
 
-                x--;
+                x = 0;
             }
         }
+
+        if(y == 1)
+        {
+            if(lairDoorDialouge.dialouges.Count == 0)
+            {
+                catHerdIntended.GetComponent<Rigidbody2D>().position = catHerdAlternate.transform.position;
+
+                catHerdAlternate.GetComponent<BoxCollider2D>().enabled = false;
+
+                y = 0;
+            }
+
+            if(catHerdAlternate.GetComponent<dialougeTrigger>().dialouges.Count == 0)
+            {
+                lairDoorDialouge.GetComponent<BoxCollider2D>().enabled = false;
+
+                y = 0;
+            }
+        }
+    }
+
+    public void returnToWoods()
+    {
+        catHerdTwo.GetComponent<Rigidbody2D>().position = catHerdAlternate.transform.position;
+
+        catHerdAlternate.GetComponent<BoxCollider2D>().enabled = false;
+
+        catHerdIntended.GetComponent<BoxCollider2D>().enabled = false;
     }
 }

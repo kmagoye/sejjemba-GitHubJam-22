@@ -36,7 +36,7 @@ public class door : MonoBehaviour
 
         if(dialougeTrigger != null)
         {
-            dialougeTrigger.startDialouge();
+            dialougeTrigger.startDialouge(); 
         }
     }
 }

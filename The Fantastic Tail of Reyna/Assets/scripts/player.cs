@@ -5,6 +5,8 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
     public float moveSpeed;
+    float effectiveMoveSpeed;
+
     Vector2 Direction;
     BoxCollider2D box;
     Rigidbody2D rb2d;
@@ -19,6 +21,8 @@ public class player : MonoBehaviour
     public bool inConvo = false;
     dialougeManager dialougeManager;
 
+    public bool caffinated = false;
+
     private void Start()
     {
         box = GetComponent<BoxCollider2D>();
@@ -29,6 +33,15 @@ public class player : MonoBehaviour
 
     private void Update()
     {
+        if (!caffinated)
+        {
+            effectiveMoveSpeed =  moveSpeed;
+        }
+        else
+        {
+            effectiveMoveSpeed = moveSpeed * 2;
+        }
+
         CheckInteractable();
 
         if (Input.GetKeyDown("x"))
@@ -67,7 +80,7 @@ public class player : MonoBehaviour
     {
         //checking for a wall in x direction
 
-        Direction = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, 0);
+        Direction = new Vector2(Input.GetAxisRaw("Horizontal") * effectiveMoveSpeed * Time.deltaTime, 0);
 
         RaycastHit2D hit = Physics2D.BoxCast(transform.position,box.size, 0f, Direction, 1 * moveSpeed * Time.deltaTime, wallLayer);
 
@@ -80,7 +93,7 @@ public class player : MonoBehaviour
 
         //same deal for y direction
 
-        Direction = new Vector2(0, Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime);
+        Direction = new Vector2(0, Input.GetAxisRaw("Vertical") * effectiveMoveSpeed * Time.deltaTime);
 
         hit = Physics2D.BoxCast(transform.position, box.size, 0f, Direction, 1 * moveSpeed * Time.deltaTime, wallLayer);
 
@@ -92,6 +105,8 @@ public class player : MonoBehaviour
 
     public void TP(Vector2 targetPosition)
     {
+        caffinated = false;
+
         rb2d.position = targetPosition;
     }
 }
