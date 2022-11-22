@@ -31,10 +31,14 @@ public class pancakeGame : MonoBehaviour
         player.enabled = false;
 
         pancakePlayer.enabled = true;
+
+        spawnPancake();
     }
 
     public void spawnPancake()
     {
-        
+        Vector3 spawnPoint = new Vector3(Random.Range(-horizontalRange, horizontalRange), verticalOffset, 0) + transform.position;
+
+        Instantiate(pancake, new Vector3(spawnPoint.x, spawnPoint.y, 10), transform.rotation);
     }
 }
