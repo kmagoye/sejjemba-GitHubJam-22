@@ -20,5 +20,20 @@ public class eventmanager : MonoBehaviour
         {
             FindObjectOfType<progressionmanager>().returnToWoods();
         }
+
+        if(eventName == "herding cats")
+        {
+
+        }
+
+        if(eventName == "end of game")
+        {
+
+        }
+
+        if(eventName == "breakfast")
+        {
+            FindObjectOfType<pancakeGame>().gameStart();
+        }
     }
 }
