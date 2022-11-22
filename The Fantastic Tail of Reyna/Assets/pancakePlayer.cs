@@ -17,7 +17,7 @@ public class pancakePlayer : MonoBehaviour
     {
         Vector2 Direction = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, 0);
 
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, box.size, 0f, Direction, 1 * moveSpeed * Time.deltaTime, wallLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Direction, (box.size.x / 2) * transform.localScale.x + 0.1f, wallLayer);
 
         if (!hit)
         {

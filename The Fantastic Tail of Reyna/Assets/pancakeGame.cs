@@ -10,6 +10,11 @@ public class pancakeGame : MonoBehaviour
     public CinemachineVirtualCamera pancakeCamera;
     public CinemachineVirtualCamera returnCamera;
 
+    public GameObject pancake;
+
+    public float verticalOffset;
+    public float horizontalRange;
+
 
     private void Start()
     {
@@ -26,5 +31,10 @@ public class pancakeGame : MonoBehaviour
         player.enabled = false;
 
         pancakePlayer.enabled = true;
+    }
+
+    public void spawnPancake()
+    {
+        
     }
 }

@@ -18,4 +18,18 @@ public class pancakeScore : MonoBehaviour
     {
         scoreText.text = score.ToString();
     }
+
+    public void Add()
+    {
+        score++;
+    }
+
+    public void Subtract()
+    {
+        if (score > 0)
+        {
+            score--;
+        }
+    }
 }
+    
