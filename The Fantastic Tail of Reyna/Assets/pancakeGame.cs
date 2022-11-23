@@ -15,7 +15,6 @@ public class pancakeGame : MonoBehaviour
     public float verticalOffset;
     public float horizontalRange;
 
-
     private void Start()
     {
         player = FindObjectOfType<player>();
