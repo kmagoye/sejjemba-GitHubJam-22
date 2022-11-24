@@ -35,5 +35,17 @@ public class eventmanager : MonoBehaviour
         {
             FindObjectOfType<pancakeGame>().gameStart();
         }
+
+        if(eventName == "breakfast start")
+        { 
+            FindObjectOfType<pancakeGame>().spawnPancake();
+
+            FindObjectOfType<player>().enabled = false;
+        }
+
+        if(eventName == "breakfast end")
+        {
+            FindObjectOfType<pancakeGame>().gameEnd();
+        }
     }
 }

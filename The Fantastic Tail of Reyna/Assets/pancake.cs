@@ -31,8 +31,6 @@ public class pancake : MonoBehaviour
                 FindObjectOfType<pancakeScore>().Subtract();
             }
 
-            FindObjectOfType<pancakeGame>().spawnPancake();
-
             Destroy(gameObject);
         }
     }

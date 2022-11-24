@@ -14,8 +14,6 @@ public class player : MonoBehaviour
     int wallLayer = 1 << 10;
     int interactableLayer = 1 << 8;
 
-    public float Range = 2f;
-    interactable[] interactables;
     public interactable selected;
 
     public bool inConvo = false;
@@ -27,7 +25,6 @@ public class player : MonoBehaviour
     {
         box = GetComponent<BoxCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
-        interactables = FindObjectsOfType<interactable>();
         dialougeManager = FindObjectOfType<dialougeManager>();
     }
 
@@ -48,6 +45,7 @@ public class player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0 && inConvo == false)
             {
+                print("a");
                 if (selected != null)
                 {
                     selected.Interact();
@@ -55,6 +53,7 @@ public class player : MonoBehaviour
             }
             if (inConvo)
             {
+                print("b");
                 dialougeManager.displayNextScentence();
             }
         }

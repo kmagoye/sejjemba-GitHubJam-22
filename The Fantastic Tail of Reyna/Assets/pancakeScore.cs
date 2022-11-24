@@ -22,6 +22,19 @@ public class pancakeScore : MonoBehaviour
     public void Add()
     {
         score++;
+
+        if(score == 20)
+        {
+            FindObjectOfType<pancakeGame>().dialougeTrigger.startDialouge();
+
+            FindObjectOfType<player>().enabled = true;
+
+            FindObjectOfType<pancakePlayer>().enabled = false;
+        }
+        else
+        {
+            FindObjectOfType<pancakeGame>().spawnPancake();
+        }
     }
 
     public void Subtract()
@@ -29,6 +42,8 @@ public class pancakeScore : MonoBehaviour
         if (score > 0)
         {
             score--;
+
+            FindObjectOfType<pancakeGame>().spawnPancake();
         }
     }
 }

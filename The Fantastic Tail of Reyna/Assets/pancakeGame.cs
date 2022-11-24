@@ -15,8 +15,12 @@ public class pancakeGame : MonoBehaviour
     public float verticalOffset;
     public float horizontalRange;
 
+    public dialougeTrigger dialougeTrigger;
+
     private void Start()
     {
+        dialougeTrigger = GetComponent<dialougeTrigger>();
+
         player = FindObjectOfType<player>();
         pancakePlayer = FindObjectOfType<pancakePlayer>();
 
@@ -27,11 +31,14 @@ public class pancakeGame : MonoBehaviour
     {
         FindObjectOfType<camera_manager>().enabledCamera = pancakeCamera;
 
-        player.enabled = false;
-
         pancakePlayer.enabled = true;
 
-        spawnPancake();
+        dialougeTrigger.startDialouge();
+    }
+
+    public void gameEnd()
+    {
+        FindObjectOfType<camera_manager>().enabledCamera = returnCamera;
     }
 
     public void spawnPancake()

@@ -51,7 +51,6 @@ public class dialougeManager : MonoBehaviour
     {
         conversing = true;
 
-
         foreach (string scentence in dialouge.scentences)
         {
             scentences.Enqueue(scentence);
@@ -98,8 +97,6 @@ public class dialougeManager : MonoBehaviour
         {
             eventmanager.triggerEvent(Event);
         }
-
-        Event = null;
     }
 
     void Type(string scentence, string name)

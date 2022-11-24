@@ -1024,7 +1024,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  Range: 2
   selected: {fileID: 0}
   inConvo: 0
   caffinated: 0
@@ -6915,7 +6914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34, y: 17.5, z: -10}
+  m_LocalPosition: {x: 34, y: 9.25, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8159,23 +8158,6 @@ MonoBehaviour:
     - but you can't skip breakfast, love, "breakfast is the...
     - ...most important meal of the day" ugh, fine, do your worst.
     Event: breakfast
-  - name:
-    - harry
-    - reyna
-    - harry
-    - reyna
-    - harry
-    - reyna
-    - reyna
-    scentences:
-    - and now you're fueled up for your big day!
-    - see, I get that, but why can't I just eat normally off the table?
-    - studies have shown that aerial pancakes have less trans fat!
-    - that literally isn't true.
-    - ... do you want pancakes or not?
-    - ...
-    - thanks for breakfast, babe!
-    Event: 
 --- !u!61 &919370924
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11155,6 +11137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1447165322}
   - component: {fileID: 1447165321}
+  - component: {fileID: 1447165323}
   m_Layer: 0
   m_Name: pancake game
   m_TagString: Untagged
@@ -11179,7 +11162,7 @@ MonoBehaviour:
   pancake: {fileID: 6230395615430466774, guid: 3db1293451d954e99b259c91f1270a5c, type: 3}
   verticalOffset: 4
   horizontalRange: 1
-  scoreMultiplier: 0.05
+  dialougeTrigger: {fileID: 0}
 --- !u!4 &1447165322
 Transform:
   m_ObjectHideFlags: 0
@@ -11202,6 +11185,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1447165323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447165320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c3810acef09464babd78e8962bd48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dialouges:
+  - name: []
+    scentences: []
+    Event: 
+  - name:
+    - harry
+    - reyna
+    - harry
+    - reyna
+    scentences:
+    - okay babe, try to get 20 of them, got it?
+    - man, i'm not even that hungry.
+    - whats that?
+    - nothing!! ready!!
+    Event: breakfast start
+  - name:
+    - harry
+    - reyna
+    - harry
+    - reyna
+    - harry
+    - reyna
+    - reyna
+    scentences:
+    - and now you're fueled up for your big day!
+    - see, I get that, but why can't I just eat normally off the table?
+    - studies have shown that aerial pancakes have less trans fat!
+    - that literally isn't true.
+    - ... do you want pancakes or not?
+    - ...
+    - thanks for breakfast, babe!
+    Event: breakfast end
 --- !u!1 &1473433945
 GameObject:
   m_ObjectHideFlags: 0
