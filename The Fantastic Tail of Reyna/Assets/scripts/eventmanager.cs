@@ -46,6 +46,18 @@ public class eventmanager : MonoBehaviour
         if(eventName == "breakfast end")
         {
             FindObjectOfType<pancakeGame>().gameEnd();
+
+            FindObjectOfType<progressionmanager>().castledoor.enabled = true;
+        }
+
+        if(eventName == "cat battle")
+        {
+            FindObjectOfType<monteGame>().gameStart();
+        }
+
+        if(eventName == "monte start")
+        {
+            FindObjectOfType<monteGame>().giveKey();
         }
     }
 }

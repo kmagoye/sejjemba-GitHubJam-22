@@ -45,7 +45,6 @@ public class player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0 && inConvo == false)
             {
-                print("a");
                 if (selected != null)
                 {
                     selected.Interact();
@@ -53,7 +52,6 @@ public class player : MonoBehaviour
             }
             if (inConvo)
             {
-                print("b");
                 dialougeManager.displayNextScentence();
             }
         }

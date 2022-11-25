@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class progressionmanager : MonoBehaviour
 {
+    public BoxCollider2D castledoor;
+
     public dialougeTrigger skatersOne;
     public dialougeTrigger fence;
 
@@ -29,6 +31,8 @@ public class progressionmanager : MonoBehaviour
     private void Start()
     {
          GetComponent<dialougeTrigger>().startDialouge();
+
+        castledoor.enabled = false;
     }
 
     private void Update()

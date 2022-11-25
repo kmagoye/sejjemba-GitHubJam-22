@@ -5,8 +5,8 @@ using Cinemachine;
 
 public class pancakeGame : MonoBehaviour
 {
-    player player;
     pancakePlayer pancakePlayer;
+    player player;
     public CinemachineVirtualCamera pancakeCamera;
     public CinemachineVirtualCamera returnCamera;
 
