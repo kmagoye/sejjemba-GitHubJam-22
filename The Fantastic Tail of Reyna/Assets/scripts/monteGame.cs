@@ -5,11 +5,10 @@ using Cinemachine;
 
 public class monteGame : MonoBehaviour
 {
-    player player;
     public CinemachineVirtualCamera monteCamera;
     public CinemachineVirtualCamera returnCamera;
 
-    dialougeTrigger dialougeTrigger;
+    public dialougeTrigger dialougeTrigger;
 
     monteCat[] cats;
 
@@ -17,13 +16,52 @@ public class monteGame : MonoBehaviour
 
     monteSlot[] slots;
 
-    private void Start()
+    public int speed;
+
+    public int shuffleDelay;
+
+    public int shuffleAmount;
+
+    public bool clickTime = false;
+
+    private void Update()
     {
-        
+        if (clickTime)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                bool won = false;
+
+                RaycastHit2D hit = Physics2D.Raycast(FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition), transform.position, 0.01f);
+
+                if (hit != null)
+                {
+                    if (hit.transform.CompareTag("cat"))
+                    {
+                        if (hit.transform.GetComponent<monteCat>().hasKey)
+                        {
+                            print("has key");
+
+                            won = true;
+                        }
+                        else
+                        {
+                            print("doesn't");
+                        }
+                    }
+
+                    returnKey(won);
+
+                    clickTime = false;
+                }
+            }
+        }
     }
 
     public void gameStart()
     {
+        FindObjectOfType<player>().inGame = true;
+
         FindObjectOfType<camera_manager>().SetCamera(monteCamera);
 
         dialougeTrigger = GetComponent<dialougeTrigger>();
@@ -50,13 +88,27 @@ public class monteGame : MonoBehaviour
 
             x++;
         }
+    }
 
-        shuffle(1);
+    public void gameEnd()
+    {
+        FindObjectOfType<player>().inGame = false;
+
+        FindObjectOfType<camera_manager>().SetCamera(returnCamera);
     }
 
     public void giveKey()
     {
-        FindObjectOfType<monteKey>().rb2d.position = cats[Random.Range(0, 7)].transform.position;
+        FindObjectOfType<monteKey>().Move(cats[Random.Range(0, 7)], speed, shuffleDelay);
+
+        //FindObjectOfType<monteKey>().rb2d.position = cats[Random.Range(0, 7)].transform.position;
+    }
+
+    private void returnKey(bool Won)
+    {
+        StartCoroutine(FindObjectOfType<monteKey>().move(transform.position, speed, shuffleDelay, false, Won));
+
+        FindObjectOfType<monteKey>().held = false;
     }
 
     public void shuffle(int times)
@@ -87,7 +139,7 @@ public class monteGame : MonoBehaviour
                 z.Add(slotArray[q][i]);
             }
 
-            cats[i].receivePath(z);
+            cats[i].receivePath(z,speed,shuffleDelay);
         }
     }
 

@@ -14,6 +14,8 @@ public class eventmanager : MonoBehaviour
         if (eventName == "lair key obtained")
         {
             FindObjectOfType<progressionmanager>().lairDoorKeyObtained = true;
+
+            FindObjectOfType<monteGame>().gameEnd();
         }
 
         if(eventName == "returned to woods")
@@ -54,6 +56,7 @@ public class eventmanager : MonoBehaviour
         {
             FindObjectOfType<monteGame>().gameStart();
         }
+
 
         if(eventName == "monte start")
         {

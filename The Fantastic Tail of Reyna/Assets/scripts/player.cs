@@ -21,6 +21,8 @@ public class player : MonoBehaviour
 
     public bool caffinated = false;
 
+    public bool inGame;
+
     private void Start()
     {
         box = GetComponent<BoxCollider2D>();
@@ -43,7 +45,7 @@ public class player : MonoBehaviour
 
         if (Input.GetKeyDown("x"))
         {
-            if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0 && inConvo == false)
+            if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0 && inConvo == false && inGame == false)
             {
                 if (selected != null)
                 {

@@ -7,14 +7,32 @@ public class monteCat : MonoBehaviour
     public bool hasKey;
     Rigidbody2D rb2d;
 
-    public int Speed = 10;
+    SpriteRenderer sprite;
+
+    bool dim = false;
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+
+        sprite = GetComponent<SpriteRenderer>();
     }
 
-    public void receivePath(List<monteSlot> slotPath)
+    private void Update()
+    {
+        dim = FindObjectOfType<monteKey>().held;
+
+        if (dim)
+        {
+            sprite.color = Color.black;
+        }
+        else
+        {
+            sprite.color = Color.white;
+        }
+    }
+
+    public void receivePath(List<monteSlot> slotPath, int Speed, int delay)
     {
         Queue<Vector2> targets = new Queue<Vector2>();
 
@@ -23,15 +41,14 @@ public class monteCat : MonoBehaviour
             targets.Enqueue(slot.location);
         }
 
-        StartCoroutine(Move(targets, Speed));
+        StartCoroutine(Move(targets, Speed, delay));
 
+        
     }
 
-    IEnumerator Move(Queue<Vector2> targets, int speed)
+    IEnumerator Move(Queue<Vector2> targets, int speed, int delay)
     {
         int x = targets.Count;
-
-        //print(string.Join(",", targets));
 
         for(int i = 0; i < x; i++)
         {
@@ -41,11 +58,9 @@ public class monteCat : MonoBehaviour
 
             Vector2 direction =  target - rb2d.position;
 
-            print(direction);
-
             while(y < speed)
             {
-                transform.Translate(direction/speed * y);
+                transform.Translate(direction/speed);
 
                 y++;
 
@@ -53,6 +68,17 @@ public class monteCat : MonoBehaviour
             }
 
             rb2d.position = target;
+
+            int z = 1;
+
+            while(z < delay)
+            {
+                z++;
+
+                yield return new WaitForFixedUpdate();
+            }
         }
+
+        FindObjectOfType<monteGame>().clickTime = true;
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - wall
   - lava
+  - cat
   layers:
   - Default
   - TransparentFX
