@@ -23,17 +23,22 @@ public class eventmanager : MonoBehaviour
             FindObjectOfType<progressionmanager>().returnToWoods();
         }
 
-        if(eventName == "herding cats")
+        if(eventName == "rap battle")
         {
-
+            FindObjectOfType<rapBattleGame>().gameStart();
         }
 
-        if(eventName == "end of game")
+        if(eventName == "rap battle start")
         {
-
+            FindObjectOfType<rapBattleGame>().roundStart();
         }
 
-        if(eventName == "breakfast")
+        if (eventName == "battle rap end")
+        {
+            FindObjectOfType<rapBattleGame>().gameEnd();
+        }
+
+        if (eventName == "breakfast")
         {
             FindObjectOfType<pancakeGame>().gameStart();
         }

@@ -40,13 +40,7 @@ public class monteGame : MonoBehaviour
                     {
                         if (hit.transform.GetComponent<monteCat>().hasKey)
                         {
-                            print("has key");
-
                             won = true;
-                        }
-                        else
-                        {
-                            print("doesn't");
                         }
                     }
 

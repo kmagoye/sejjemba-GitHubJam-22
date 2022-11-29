@@ -7,6 +7,8 @@ TagManager:
   - wall
   - lava
   - cat
+  - word
+  - slot
   layers:
   - Default
   - TransparentFX
