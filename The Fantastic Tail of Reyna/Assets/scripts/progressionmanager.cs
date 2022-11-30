@@ -8,25 +8,22 @@ public class progressionmanager : MonoBehaviour
 
     public dialougeTrigger skatersOne;
     public dialougeTrigger fence;
-
     public GameObject skatersIntended;
     public GameObject skatersAlternate;
-
-
-    public dialougeTrigger lairDoorDialouge;
-    public GameObject lairDoor;
+    public GameObject fenceDoor;
+    public bool wonRapBattle = false;
 
     public GameObject catHerdIntended;
     public GameObject catHerdAlternate;
-
-    public GameObject catHerdTwo;
+    public dialougeTrigger lairDoorDialouge;
+    public GameObject lairDoor;
+    public bool lairDoorKeyObtained = false;
 
     bool intendedSkaterPath = true;
 
     int x = 1;
     int y = 1;
-
-    public bool lairDoorKeyObtained = false;
+    int z = 1;
 
     private void Start()
     {
@@ -67,6 +64,19 @@ public class progressionmanager : MonoBehaviour
             }
         }
 
+        if(z == 1)
+        {
+            if (wonRapBattle)
+            {
+                fenceDoor.GetComponent<BoxCollider2D>().enabled = true;
+                fenceDoor.GetComponent<SpriteRenderer>().enabled = true;
+
+                fence.dialouges.Clear();
+
+                z--;
+            }
+        }
+
         if(y == 1)
         {
             if(lairDoorDialouge.dialouges.Count == 0)
@@ -78,21 +88,12 @@ public class progressionmanager : MonoBehaviour
                 y = 0;
             }
 
-            if(catHerdAlternate.GetComponent<dialougeTrigger>().dialouges.Count == 0)
+            if(lairDoorKeyObtained)
             {
                 lairDoorDialouge.GetComponent<BoxCollider2D>().enabled = false;
 
                 y = 0;
             }
         }
-    }
-
-    public void returnToWoods()
-    {
-        catHerdTwo.GetComponent<Rigidbody2D>().position = catHerdAlternate.transform.position;
-
-        catHerdAlternate.GetComponent<BoxCollider2D>().enabled = false;
-
-        catHerdIntended.GetComponent<BoxCollider2D>().enabled = false;
     }
 }

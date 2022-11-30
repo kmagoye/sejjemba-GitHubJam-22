@@ -18,11 +18,6 @@ public class eventmanager : MonoBehaviour
             FindObjectOfType<monteGame>().gameEnd();
         }
 
-        if(eventName == "returned to woods")
-        {
-            FindObjectOfType<progressionmanager>().returnToWoods();
-        }
-
         if(eventName == "rap battle")
         {
             FindObjectOfType<rapBattleGame>().gameStart();
@@ -36,6 +31,7 @@ public class eventmanager : MonoBehaviour
         if (eventName == "battle rap end")
         {
             FindObjectOfType<rapBattleGame>().gameEnd();
+            FindObjectOfType<progressionmanager>().wonRapBattle = true;
         }
 
         if (eventName == "breakfast")
