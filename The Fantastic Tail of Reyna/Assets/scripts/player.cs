@@ -23,11 +23,14 @@ public class player : MonoBehaviour
 
     public bool inGame;
 
+    Animator Animator;
+
     private void Start()
     {
         box = GetComponent<BoxCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
         dialougeManager = FindObjectOfType<dialougeManager>();
+        Animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -59,6 +62,7 @@ public class player : MonoBehaviour
         }
     }
 
+    
     void CheckInteractable()
     {
         //checking if player is within a interactable's hit box
@@ -99,6 +103,26 @@ public class player : MonoBehaviour
         if (!hit && !inConvo)
         {
             transform.Translate(Direction);
+        }
+
+        setAnimator();
+    }
+    void setAnimator()
+    {
+        bool moving = false;
+
+        if (Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("Vertical") != 0)
+        {
+            moving = true;
+        }
+
+        Animator.SetBool("moving", moving);
+
+        Animator.SetInteger("x", Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
+
+        if (Input.GetAxisRaw("Horizontal") == 0)
+        {
+            Animator.SetInteger("y", Mathf.RoundToInt(Input.GetAxisRaw("Vertical")));
         }
     }
 

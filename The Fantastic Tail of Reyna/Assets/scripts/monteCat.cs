@@ -9,6 +9,8 @@ public class monteCat : MonoBehaviour
 
     SpriteRenderer sprite;
 
+    public SpriteRenderer mouth;
+
     bool dim = false;
 
     private void Start()
@@ -16,6 +18,8 @@ public class monteCat : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         sprite = GetComponent<SpriteRenderer>();
+
+        mouth.enabled = false;
     }
 
     private void Update()
@@ -42,8 +46,6 @@ public class monteCat : MonoBehaviour
         }
 
         StartCoroutine(Move(targets, Speed, delay));
-
-        
     }
 
     IEnumerator Move(Queue<Vector2> targets, int speed, int delay)

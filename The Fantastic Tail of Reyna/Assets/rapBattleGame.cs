@@ -49,7 +49,7 @@ public class rapBattleGame : MonoBehaviour
 
         foreach(rapBattleKid kid in kids)
         {
-            StartCoroutine(kid.move(kidSpeed, kid.target.position, new Vector2(0, 2 * (kids.IndexOf(kid) - 1))));
+            StartCoroutine(kid.move(kidSpeed, kid.target.position, new Vector2(0.8f * (kids.IndexOf(kid) - 1),0)));
         }
 
         dialougeTrigger.startDialouge();
@@ -84,7 +84,7 @@ public class rapBattleGame : MonoBehaviour
         {
             foreach (rapBattleKid kid in kids)
             {
-                StartCoroutine(kid.move(kidSpeed, kid.target.position, new Vector2(0, 2 * (kids.IndexOf(kid) - 1))));
+                StartCoroutine(kid.move(kidSpeed, kid.target.position, new Vector2(0.8f * (kids.IndexOf(kid) - 1), 0)));
             }
 
             dialougeTrigger.startDialouge();

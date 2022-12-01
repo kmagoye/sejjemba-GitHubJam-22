@@ -93,9 +93,11 @@ public class monteGame : MonoBehaviour
 
     public void giveKey()
     {
-        FindObjectOfType<monteKey>().Move(cats[Random.Range(0, 7)], speed, shuffleDelay);
+        int randomCat = Random.Range(0, 7);
 
-        //FindObjectOfType<monteKey>().rb2d.position = cats[Random.Range(0, 7)].transform.position;
+        FindObjectOfType<monteKey>().Move(cats[randomCat], speed, shuffleDelay);
+
+        cats[randomCat].mouth.enabled = true;
     }
 
     private void returnKey(bool Won)

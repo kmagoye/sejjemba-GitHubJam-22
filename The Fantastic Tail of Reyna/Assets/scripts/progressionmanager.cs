@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class progressionmanager : MonoBehaviour
 {
     public BoxCollider2D castledoor;
+
+    public SpriteRenderer coffee;
+    public Sprite drunkCoffee;
 
     public dialougeTrigger skatersOne;
     public dialougeTrigger fence;
     public GameObject skatersIntended;
     public GameObject skatersAlternate;
     public GameObject fenceDoor;
+    public SpriteRenderer boomBox;
     public bool wonRapBattle = false;
 
     public GameObject catHerdIntended;
@@ -21,14 +26,16 @@ public class progressionmanager : MonoBehaviour
 
     bool intendedSkaterPath = true;
 
+    public CinemachineVirtualCamera end;
+    public CinemachineVirtualCamera bedroom;
+
+    int w = 1;
     int x = 1;
     int y = 1;
     int z = 1;
 
     private void Start()
     {
-         GetComponent<dialougeTrigger>().startDialouge();
-
         castledoor.enabled = false;
     }
 
@@ -71,6 +78,8 @@ public class progressionmanager : MonoBehaviour
                 fenceDoor.GetComponent<BoxCollider2D>().enabled = true;
                 fenceDoor.GetComponent<SpriteRenderer>().enabled = true;
 
+                boomBox.enabled = false;
+
                 fence.dialouges.Clear();
 
                 z--;
@@ -93,6 +102,15 @@ public class progressionmanager : MonoBehaviour
                 lairDoorDialouge.GetComponent<BoxCollider2D>().enabled = false;
 
                 y = 0;
+            }
+        }
+
+        if(w == 1)
+        {
+            if (Input.GetKeyDown("x"))
+            {
+                GetComponent<dialougeTrigger>().startDialouge();
+                w++;
             }
         }
     }

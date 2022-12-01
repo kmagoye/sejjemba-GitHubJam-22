@@ -6,9 +6,11 @@ public class eventmanager : MonoBehaviour
 {
     public void triggerEvent(string eventName)
     {
-        if(eventName == "coffee")
+        if (eventName == "coffee")
         {
             FindObjectOfType<player>().caffinated = true;
+
+            FindObjectOfType<progressionmanager>().coffee.sprite = FindObjectOfType<progressionmanager>().drunkCoffee;
         }
 
         if (eventName == "lair key obtained")
@@ -18,12 +20,12 @@ public class eventmanager : MonoBehaviour
             FindObjectOfType<monteGame>().gameEnd();
         }
 
-        if(eventName == "rap battle")
+        if (eventName == "rap battle")
         {
             FindObjectOfType<rapBattleGame>().gameStart();
         }
 
-        if(eventName == "rap battle start")
+        if (eventName == "rap battle start")
         {
             FindObjectOfType<rapBattleGame>().roundStart();
         }
@@ -39,29 +41,39 @@ public class eventmanager : MonoBehaviour
             FindObjectOfType<pancakeGame>().gameStart();
         }
 
-        if(eventName == "breakfast start")
-        { 
+        if (eventName == "breakfast start")
+        {
             FindObjectOfType<pancakeGame>().spawnPancake();
 
             FindObjectOfType<player>().enabled = false;
         }
 
-        if(eventName == "breakfast end")
+        if (eventName == "breakfast end")
         {
             FindObjectOfType<pancakeGame>().gameEnd();
 
             FindObjectOfType<progressionmanager>().castledoor.enabled = true;
         }
 
-        if(eventName == "cat battle")
+        if (eventName == "cat battle")
         {
             FindObjectOfType<monteGame>().gameStart();
         }
 
-
-        if(eventName == "monte start")
+        if (eventName == "monte start")
         {
             FindObjectOfType<monteGame>().giveKey();
+        }
+
+        if (eventName == "game end")
+        {
+            FindObjectOfType<camera_manager>().SetCamera(FindObjectOfType<progressionmanager>().end);
+        }
+
+        if (eventName == "game start")
+        {
+            FindObjectOfType<camera_manager>().SetCamera(FindObjectOfType<progressionmanager>().bedroom);
+            FindObjectOfType<progressionmanager>().GetComponent<dialougeTrigger>().startDialouge();
         }
     }
 }

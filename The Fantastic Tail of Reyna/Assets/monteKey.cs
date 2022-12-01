@@ -67,6 +67,7 @@ public class monteKey : MonoBehaviour
 
         if (startShuffle)
         {
+            cat.mouth.enabled = false;
             held = cat.hasKey = true;
             FindObjectOfType<monteGame>().shuffle(FindObjectOfType<monteGame>().shuffleAmount);
         }
