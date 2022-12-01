@@ -43,8 +43,8 @@ public class pancakeScore : MonoBehaviour
         {
             score--;
 
-            FindObjectOfType<pancakeGame>().spawnPancake();
         }
+        FindObjectOfType<pancakeGame>().spawnPancake();
     }
 }
     

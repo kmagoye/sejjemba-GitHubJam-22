@@ -17,6 +17,8 @@ public class pancakeGame : MonoBehaviour
 
     public dialougeTrigger dialougeTrigger;
 
+    public Rigidbody2D harry;
+
     private void Start()
     {
         dialougeTrigger = GetComponent<dialougeTrigger>();
@@ -44,6 +46,8 @@ public class pancakeGame : MonoBehaviour
     public void spawnPancake()
     {
         Vector3 spawnPoint = new Vector3(Random.Range(-horizontalRange, horizontalRange), verticalOffset, 0) + transform.position;
+
+        harry.position = new Vector3(spawnPoint.x, spawnPoint.y, 10);
 
         Instantiate(pancake, new Vector3(spawnPoint.x, spawnPoint.y, 10), transform.rotation);
     }
